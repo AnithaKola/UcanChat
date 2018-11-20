@@ -1,0 +1,29 @@
+<div class="row login-container">
+  <div class="abs-center">
+      <div class="form-header center">
+          Member Login
+      </div>
+      <div class="col-md-12 form-container">
+          <form [formGroup]="signinForm">
+              <div class="form-group">
+                  <input type="text" class="form-control" id="username" formControlName="username" placeholder="User Name">
+                  <div *ngIf="signinForm.controls['username'].errors && !signinForm.controls['username'].pristine && !signinForm.controls['username'].untouched"
+                      class="error-msg">
+                      <div [hidden]="!signinForm.controls['username'].errors.required">User Name is required.</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <input type="password" class="form-control" id="pwd" formControlName="password" placeholder="Password">
+                  <div *ngIf="signinForm.controls['password'].errors && !signinForm.controls['password'].pristine && !signinForm.controls['password'].untouched"
+                      class="error-msg">
+                      <div [hidden]="!signinForm.controls['password'].errors.required">Password is required.</div>
+                  </div>
+              </div>
+              <div class="pull-right form-footer">
+                    <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
+                  <button type="submit" (click)="submitSigninForm()" class="btn btn-default" [disabled]="!signinForm.valid">Submit</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

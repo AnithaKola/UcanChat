@@ -1,0 +1,37 @@
+<div class="pull-right dropdown" (click)="logout()">
+        <img src="./assets/user.png">{{_userDetails.full_name}}
+        <div class="dropdown-content">
+          <a><i class="fa fa-sign-out"></i><span>Logout</span></a>
+        </div>
+      </div>
+<div class="row chat-container">
+  <ul class="col-md-3 list-group">
+      <li *ngFor="let usr of usersList;let index = index" id={{usr.user.id}} class="list-group-item"  [class.active]="index==0" (click)="changeUser(usr)">
+          <img src="./assets/user.png" class="pull-left">
+          <div class="pull-left">
+              <div class="name">{{usr.user.full_name}}</div>
+              <div class="email">{{usr.user.email}}</div>
+          </div>
+          <span *ngIf="usr.notification" class="pull-right"><i class="fa fa-envelope"></i></span>
+      </li>
+  </ul>
+  <div class="col-md-9 message-main">
+      <div class="row message-scroll" id="scrollDiv">
+          <div class="messages-container">
+              <div class="message-list-container">
+                  <p *ngFor="let chat of chatHistory"  [ngClass]="{'to-message': chat.sender_id == loggedInUSerId}">
+                      
+                      {{chat.message}}
+                      <!--<i class="fa fa-check" [ngClass]="{read: chat.read == 1}"></i> -->
+                  </p>
+              </div>
+          </div>
+      </div>
+      <form #chat="ngForm">
+        <div class="message-container" class="row">
+            <input type="text" name="chatContent" id="chatContent" [(ngModel)]="chatContent" class="col-md-10" placeholder="Type your message here..." />
+            <button class="col-md-2 btn btn-default" (click)="sendMessage(selectedUser.user.id, chat); chat.reset();">Send</button>
+        </div>
+      </form>
+  </div>
+</div>
